@@ -820,27 +820,27 @@ SOCIAL       %%%%%%%%%%%%%%%%%%%% 95%
   const groups=['cafe','skincare','street','food','tech','site'];
   const allCbs=document.querySelectorAll('.proj-tasks input[type="checkbox"]');
 
-  function getData(){
-    const d=[];allCbs.forEach(cb=>d.push(cb.checked));
-    return d;
+  function encode(){
+    return allCbs.map(cb=>cb.checked?'1':'0').join('');
   }
-  function applyData(d){
-    if(!Array.isArray(d))return;
-    allCbs.forEach((cb,i)=>{if(d[i])cb.checked=!!d[i];else cb.checked=false});
+  function decode(str){
+    if(typeof str!=='string')return;
+    allCbs.forEach((cb,i)=>{cb.checked=str[i]==='1'});
   }
   function load(){
     const s=localStorage.getItem(STORAGE);
-    if(s){try{applyData(JSON.parse(s))}catch(e){}}
+    if(s){try{decode(s)}catch(e){}}
     updateAll();
     fetch(SYNC_URL+'/get/'+SYNC_KEY,{cache:'no-store'})
       .then(r=>r.ok?r.json():Promise.reject())
-      .then(j=>{if(j.status==='SUCCESS'&&j.val){try{const d=JSON.parse(j.val);applyData(d);localStorage.setItem(STORAGE,j.val)}catch(e){}}updateAll()})
+      .then(j=>{if(j.status==='SUCCESS'&&j.val){try{decode(j.val);localStorage.setItem(STORAGE,j.val)}catch(e){}}updateAll()})
       .catch(()=>{});
   }
   function save(){
-    const d=getData();
-    localStorage.setItem(STORAGE,JSON.stringify(d));
-    fetch(SYNC_URL+'/set/'+SYNC_KEY+'/'+encodeURIComponent(JSON.stringify(d)),{cache:'no-store'}).catch(()=>{});
+    const v=encode();
+    localStorage.setItem(STORAGE,v);
+    const body=JSON.stringify({key:SYNC_KEY,val:v});
+    fetch(SYNC_URL+'/set',{method:'POST',headers:{'Content-Type':'application/json'},body,cache:'no-store'}).catch(()=>{});
   }
   function updateAll(){
     let totalDone=0,totalAll=0;
