@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Project Roadmap — Creative System</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 549.82 502.03'%3E%3Cpath fill='%2300df82' d='M494.69,264.56c11.51-13.98,20.32-27.45,27.02-39.21,4.35-10.36,8.41-21.36,12-33,22.77-73.74,17.61-142.06,7.64-191.65-44.16-.1-88.32-.21-132.47-.31-5.8-.01-11.59-.03-17.39-.04h-221.52c-2.28,0-4.23.55-5.82,1.62-.47.32-.92.68-1.33,1.09-1.19,1.19-1.98,2.63-2.39,4.31-.21.88-.33,1.83-.33,2.85v70.14c-.13,22.99-.25,45.99-.38,68.98,5.02,7.81,12.75,18.03,24.14,27.99,12.25,10.72,23.94,16.97,31.14,20.32,16.78,7.81,35.49,12.19,55.23,12.19,9.84,0,19.42-1.09,28.64-3.15v-77.96c0-2.16.79-3.52,2.36-4.1h121.11c-12.64,41.48-41.77,75.76-79.76,95.21-21.7,11.11-46.3,17.38-72.35,17.38-12.33,0-24.33-1.4-35.85-4.06-23.54-5.42-45.07-16.08-63.32-30.66-11.53-9.21-21.75-19.98-30.33-32.01V7.15c-.45-1.71-1.33-3.18-2.65-4.39-1.3-1.19-2.74-1.98-4.31-2.41h-2.18L10.04,0c-3.01,0-5.44.93-7.28,2.76S0,7.03,0,10.04v481.95c0,3.01.92,5.44,2.76,7.28,1.84,1.84,4.27,2.76,7.28,2.76h120.99c2.67,0,5.02-.93,7.03-2.76,1.32-1.21,2.2-2.68,2.65-4.39v-158.52c4.25,3.25,10.66,7.71,19,11.95,9.43,4.8,18.56,7.32,33.59,11.42,24.5,6.69,50.29,10.26,76.91,10.26,9.66,0,19.21-.48,28.64-1.4,0,0,9.06-1.09,9.26-1.05,23.22,4.73,42.05,15.72,56.45,33.04,17.64,21.23,27.24,51.76,28.81,91.6,0,2.63.86,4.85,2.58,6.67,1.71,1.81,3.82,2.72,6.32,2.72h121.32c2.81,0,5.07-.99,6.79-2.96,1.71-1.97,2.58-4.28,2.58-6.91-.57-20.54-2.76-39.97-6.55-58.31-2.66-12.87-6.09-25.21-10.32-37-7.78-21.65-18.22-41.48-31.32-59.48-2.85-4.36-5.82-8.64-8.88-12.85-5.66-7.76-11.67-15.24-18.02-22.43,11.21-9.34,24.06-21.54,36.83-37.04Z'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#080a09;
+    --panel:#0d110f;
+    --green:#00df82;
+    --green-dim:#0a6b3a;
+    --text:#e8ede9;
+    --muted:#747b76;
+    --line:rgba(0,223,130,.25);
+    --white-line:rgba(232,237,233,.1);
+    --nav-h:52px;
+  }
+  *{box-sizing:border-box;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      linear-gradient(rgba(0,223,130,.02) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,223,130,.02) 1px,transparent 1px),
+      var(--bg);
+    background-size:32px 32px;
+    color:var(--text);
+    font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    line-height:1.5;
+    padding-top:var(--nav-h);
+  }
+  body:before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:9999;
+    background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(255,255,255,.015) 4px);
+    opacity:.3;
+  }
+
+  /* ── STICKY NAV ── */
+  .sticky-nav{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    height:var(--nav-h);
+    background:rgba(8,10,9,.94);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:28px;width:auto;filter:brightness(1.2)}
+  .brand-text{font-size:11px;letter-spacing:3px;color:var(--green);font-weight:700}
+  .nav-links{display:flex;gap:4px}
+  .nav-links a{
+    color:var(--muted);font-size:10px;letter-spacing:1.5px;
+    text-transform:uppercase;text-decoration:none;
+    padding:6px 12px;border:1px solid transparent;
+    transition:all .2s;
+  }
+  .nav-links a:hover,.nav-links a.active{
+    color:var(--green);border-color:var(--line);background:rgba(0,223,130,.06)
+  }
+  .nav-toggle{
+    display:none;background:none;border:1px solid var(--line);
+    color:var(--green);padding:4px 10px;font-size:10px;cursor:pointer;
+    letter-spacing:1px;font-family:inherit;
+  }
+
+  .wrap{max-width:1500px;margin:auto;padding:32px}
+
+  /* ── HEADER ── */
+  header{
+    border:1px solid var(--line);
+    background:rgba(8,10,9,.88);
+    padding:28px;position:relative;overflow:hidden;
+  }
+  header:after{
+    content:"SYSTEM // PORTFOLIO DEVELOPMENT";
+    position:absolute;right:20px;bottom:12px;
+    color:var(--green);font-size:10px;letter-spacing:2px;
+  }
+  .header-top{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+  .header-top img{height:56px;width:auto;filter:brightness(1.2)}
+  .eyebrow{font-size:11px;letter-spacing:3px;color:var(--green);font-weight:700}
+  h1{margin:8px 0;font-size:clamp(32px,5vw,68px);line-height:.95;letter-spacing:-3px;text-transform:uppercase}
+  .intro{max-width:850px;color:#aeb6b0;font-size:16px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--white-line);margin-top:24px}
+  .stat{padding:16px;border-right:1px solid var(--white-line)}
+  .stat:last-child{border-right:0}
+  .stat b{display:block;color:var(--green);font-size:25px}
+  .stat span{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+
+  /* ── SECTION TITLES ── */
+  .section-title{
+    display:flex;justify-content:space-between;align-items:center;
+    margin:46px 0 16px;border-bottom:1px solid var(--line);padding-bottom:10px;
+  }
+  .section-title h2{font-size:18px;letter-spacing:2px;margin:0;text-transform:uppercase}
+  .section-title span{font-size:10px;color:var(--green);letter-spacing:2px}
+
+  /* ── FILTERS ── */
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .filter-btn{
+    background:none;border:1px solid var(--white-line);
+    color:var(--muted);padding:6px 14px;font-size:10px;
+    letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+    font-family:inherit;transition:all .2s;
+  }
+  .filter-btn:hover,.filter-btn.active{
+    border-color:var(--green);color:var(--green);background:rgba(0,223,130,.06);
+  }
+
+  /* ── TABLE ── */
+  .table-wrap{overflow:auto;border:1px solid var(--line)}
+  table{border-collapse:collapse;width:100%;min-width:1250px;background:rgba(13,17,15,.9)}
+  th,td{border-right:1px solid var(--white-line);border-bottom:1px solid var(--white-line);padding:18px;vertical-align:top;text-align:left}
+  th{color:var(--green);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:#0b0f0d;position:sticky;top:0}
+  td{font-size:13px;color:#b9c0bb}
+  td:first-child{color:var(--green);font-weight:800;font-size:16px}
+  td:nth-child(2){color:var(--text);font-weight:800;min-width:180px}
+  td strong{color:var(--text)}
+  ul{padding-left:16px;margin:8px 0 0}
+  li{margin:4px 0}
+  .tag{display:inline-block;border:1px solid var(--line);color:var(--green);padding:3px 7px;font-size:9px;letter-spacing:1px;margin-top:8px}
+  .priority{display:inline-block;padding:3px 8px;font-size:9px;letter-spacing:1px;margin-left:6px}
+  .contact-box{
+    margin-top:10px;padding:8px 10px;border:1px solid var(--line);
+    background:rgba(0,223,130,.04);font-size:11px;
+  }
+  .contact-box .cb-label{font-size:8px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;margin-bottom:4px}
+  .contact-box a{color:var(--green);text-decoration:none}
+  .contact-box a:hover{text-decoration:underline}
+  .contact-box p{margin:2px 0;color:#b9c0bb}
+  .priority.high{border:1px solid #e74c3c;color:#e74c3c}
+  .priority.med{border:1px solid #f39c12;color:#f39c12}
+  .priority.low{border:1px solid var(--green);color:var(--green)}
+  .mobile-cards{display:none}
+
+  /* ── SKILL CARDS ── */
+  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .card{border:1px solid var(--line);background:rgba(13,17,15,.88);padding:18px;min-height:180px;transition:transform .2s,border-color .2s}
+  .card:hover{transform:translateY(-2px);border-color:var(--green)}
+  .card .num{color:var(--green);font-size:11px;letter-spacing:2px}
+  .card h3{font-size:17px;margin:9px 0 16px;text-transform:uppercase}
+  .meter{height:3px;background:#1a211d;margin:14px 0}
+  .meter i{display:block;height:100%;background:var(--green);transition:width .6s ease}
+  .card p{font-size:12px;color:var(--muted);margin:0}
+
+  /* ── WORKFLOW ── */
+  .workflow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .step{background:var(--panel);padding:24px;min-height:150px}
+  .step b{color:var(--green);font-size:11px;letter-spacing:2px}
+  .step h3{margin:8px 0;font-size:18px}
+  .step p{color:var(--muted);font-size:13px;margin:0}
+
+  /* ── TIMELINE ── */
+  .timeline-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);overflow:hidden}
+  .timeline-phase{padding:20px;border-right:1px solid var(--white-line);position:relative;background:var(--panel)}
+  .timeline-phase:last-child{border-right:0}
+  .timeline-phase .phase-num{font-size:10px;letter-spacing:2px;color:var(--green);margin-bottom:6px}
+  .timeline-phase h4{margin:0 0 8px;font-size:14px;text-transform:uppercase}
+  .timeline-phase .weeks{font-size:11px;color:var(--muted);margin-bottom:10px}
+  .timeline-phase ul{padding-left:14px;margin:0;font-size:12px;color:#b9c0bb}
+  .timeline-phase li{margin:3px 0}
+  .timeline-bar{margin-top:12px;height:4px;background:#1a211d;border-radius:2px;overflow:hidden}
+  .timeline-bar i{display:block;height:100%;background:var(--green);border-radius:2px}
+  .timeline-phase.parallel{border-left:2px solid rgba(0,223,130,.3)}
+  .timeline-phase .parallel-badge{position:absolute;top:8px;right:8px;font-size:8px;letter-spacing:1px;color:var(--green);border:1px solid var(--line);padding:2px 6px}
+
+  /* ── TOOLS ── */
+  .tools-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  .tool-card{border:1px solid var(--line);background:rgba(13,17,15,.88);padding:16px}
+  .tool-card h4{font-size:12px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;margin:0 0 10px}
+  .tool-card ul{padding-left:14px;margin:0;font-size:12px;color:#b9c0bb;list-style:none}
+  .tool-card li{margin:4px 0;padding-left:12px;position:relative}
+  .tool-card li:before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;border:1px solid var(--green)}
+
+  /* ── PROGRESS PER PROJECT ── */
+  .project-progress{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .proj-card{
+    border:1px solid var(--line);background:rgba(13,17,15,.9);padding:20px;
+    display:flex;flex-direction:column;
+  }
+  .proj-card.full-width{grid-column:1/-1}
+  .proj-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .proj-head h4{margin:0;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
+  .proj-head .proj-pct{color:var(--green);font-size:18px;font-weight:800}
+  .proj-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+  .proj-bar{height:4px;background:#1a211d;border-radius:2px;margin-bottom:14px;overflow:hidden}
+  .proj-bar i{display:block;height:100%;background:var(--green);border-radius:2px;transition:width .4s}
+  .proj-tasks label{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:6px 0;border-bottom:1px solid var(--white-line);
+    cursor:pointer;font-size:12px;color:#b9c0bb;
+  }
+  .proj-tasks label:hover{color:var(--text)}
+  .proj-tasks label.done{text-decoration:line-through;color:var(--muted)}
+  .proj-tasks input[type="checkbox"]{
+    appearance:none;-webkit-appearance:none;
+    width:14px;height:14px;min-width:14px;
+    border:1px solid var(--line);background:transparent;
+    cursor:pointer;margin-top:2px;position:relative;
+  }
+  .proj-tasks input[type="checkbox"]:checked{background:var(--green);border-color:var(--green)}
+  .proj-tasks input[type="checkbox"]:checked:after{
+    content:"";position:absolute;left:3px;top:0;
+    width:4px;height:7px;
+    border:solid var(--bg);border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+  }
+  .overall-bar-wrap{
+    border:1px solid var(--line);background:rgba(13,17,15,.9);
+    padding:20px;margin-bottom:16px;
+    display:flex;align-items:center;gap:20px;
+  }
+  .overall-bar-wrap .label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+  .overall-bar{flex:1;height:6px;background:#1a211d;border-radius:3px;overflow:hidden}
+  .overall-bar i{display:block;height:100%;background:var(--green);border-radius:3px;transition:width .4s}
+  .overall-bar-wrap .pct{color:var(--green);font-size:22px;font-weight:800;white-space:nowrap}
+
+  /* ── SITE ── */
+  .site{border:1px solid var(--line);padding:24px;background:rgba(13,17,15,.9)}
+  pre{margin:0;color:#aeb6b0;font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap}
+  .green{color:var(--green)}
+
+  footer{margin-top:40px;border-top:1px solid var(--line);padding:18px 0;color:var(--muted);font-size:10px;letter-spacing:2px;display:flex;justify-content:space-between}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:1100px){
+    .cards{grid-template-columns:repeat(3,1fr)}
+    .tools-grid{grid-template-columns:repeat(3,1fr)}
+    .timeline-track{grid-template-columns:repeat(2,1fr)}
+    .timeline-phase:nth-child(2){border-right:0}
+    .timeline-phase:nth-child(1),.timeline-phase:nth-child(2){border-bottom:1px solid var(--white-line)}
+    .project-progress{grid-template-columns:1fr}
+  }
+  @media(max-width:900px){
+    .wrap{padding:16px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .cards{grid-template-columns:1fr 1fr}
+    .workflow{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;flex-direction:column;
+      position:absolute;top:var(--nav-h);left:0;right:0;
+      background:rgba(8,10,9,.96);border-bottom:1px solid var(--line);
+      padding:12px;gap:4px;
+    }
+    .nav-toggle{display:block}
+    .table-wrap{display:none}
+    .mobile-cards{display:flex;flex-direction:column;gap:12px}
+    .mobile-card{border:1px solid var(--line);background:rgba(13,17,15,.9);padding:18px}
+    .mobile-card .mc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .mobile-card .mc-num{color:var(--green);font-size:20px;font-weight:800}
+    .mobile-card h4{margin:0;font-size:15px;text-transform:uppercase}
+    .mobile-card .mc-section{margin-top:10px}
+    .mobile-card .mc-label{font-size:9px;letter-spacing:1.5px;color:var(--green);text-transform:uppercase;margin-bottom:4px}
+    .mobile-card .mc-section ul{padding-left:14px;margin:0;font-size:12px;color:#b9c0bb}
+    .mobile-card .mc-section li{margin:2px 0}
+    .mobile-card .mc-value{font-size:12px;color:#b9c0bb;margin-top:10px}
+    .mobile-card .mc-value strong{color:var(--text)}
+    .tools-grid{grid-template-columns:1fr 1fr}
+    .timeline-track{grid-template-columns:1fr}
+    .timeline-phase{border-right:0!important;border-bottom:1px solid var(--white-line)!important}
+    .timeline-phase:last-child{border-bottom:0!important}
+  }
+  @media(max-width:600px){
+    .cards{grid-template-columns:1fr}
+    .tools-grid{grid-template-columns:1fr}
+    h1{letter-spacing:-1px}
+    .stats{grid-template-columns:1fr 1fr}
+    .header-top img{height:40px}
+    .brand img{height:22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════ STICKY NAV ═══════ -->
+<nav class="sticky-nav">
+  <div class="brand">
+    <img src="LOGO (ICONO).svg" alt="KIRU">
+    <span class="brand-text">KIRU</span>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#matrix" class="active">Matrix</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#skills">Skills</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#tools">Tools</a>
+    <a href="#progress">Progress</a>
+    <a href="#website">Website</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">MENU</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ═══════ HEADER ═══════ -->
+<header>
+  <div class="header-top">
+    <img src="LOGO (ICONO).svg" alt="KIRU">
+    <div>
+      <div class="eyebrow">KIRU // CREATIVE PORTFOLIO SYSTEM</div>
+    </div>
+  </div>
+  <h1>5 Projects<br>To Build The Portfolio</h1>
+  <p class="intro">
+    Roadmap para construir cinco casos de estudio que demuestren branding,
+    dirección de arte, fotografía, video, motion y contenido para redes.
+    La meta es terminar con una web de portafolio que presente todo como un
+    sistema creativo coherente.
+  </p>
+  <div class="stats">
+    <div class="stat"><b>05</b><span>Projects</span></div>
+    <div class="stat"><b>02</b><span>Free Projects</span></div>
+    <div class="stat"><b>06+</b><span>Creative Skills</span></div>
+    <div class="stat"><b>01</b><span>Portfolio Website</span></div>
+  </div>
+</header>
+
+<!-- ═══════ 01 — PROJECT MATRIX ═══════ -->
+<div class="section-title" id="matrix">
+  <h2>01 — Project Matrix</h2>
+  <span>BRAND / PHOTO / VIDEO / SOCIAL</span>
+</div>
+
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="branding">Branding</button>
+  <button class="filter-btn" data-filter="photo">Photography</button>
+  <button class="filter-btn" data-filter="video">Video / Motion</button>
+  <button class="filter-btn" data-filter="social">Social Content</button>
+  <button class="filter-btn" data-filter="free">Free Projects</button>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>#</th><th>Proyecto / Sector</th><th>Que construir</th><th>Fotografia</th>
+<th>Video / Motion</th><th>Contenido Social</th><th>Valor para el portfolio</th>
+</tr>
+</thead>
+<tbody>
+<tr data-skills="branding photo video social free">
+<td>01</td>
+<td>CAFE / SPECIALTY COFFEE<br><span class="tag">FREE</span><span class="priority high">START HERE</span>
+<div class="contact-box">
+  <div class="cb-label">Candidato recomendado</div>
+  <p><strong>Cafe del Centro</strong></p>
+  <p>Cafe de especialidad, Est. 2023, Centro Historico</p>
+  <p><a href="https://instagram.com/cafedelcentrosv" target="_blank">IG: @cafedelcentrosv</a></p>
+  <p>Tel: 7691-7817</p>
+  <p>Dir: 2a Avenida Sur 1101, San Salvador</p>
+</div>
+<div class="contact-box" style="margin-top:6px">
+  <div class="cb-label">Alternativa</div>
+  <p><strong>Kafeina</strong></p>
+  <p>Cafe de especialidad, San Miguel. Fundado por Stefany Rivera (ingeniera agronoma). Metodos artesanales V60, Chemex. Granos de altura.</p>
+  <p><a href="https://instagram.com/kafeina.sv" target="_blank">IG: @kafeina.sv</a></p>
+  <p>URB. Ciudad Real, Pol. B1, atras de Plaza Palmera, San Miguel</p>
+  <p>Lun-Dom 12pm-8pm</p>
+</div>
+</td>
+<td><strong>Rebranding completo</strong><ul><li>Logo</li><li>Paleta y tipografia</li><li>Packaging</li><li>Vasos / bolsas</li><li>Menu</li><li>Sistema grafico</li></ul></td>
+<td><ul><li>Producto</li><li>Lifestyle</li><li>Barista</li><li>Cafe servido</li><li>Texturas</li><li>Editorial</li></ul></td>
+<td><ul><li>Reel de preparacion</li><li>Cinematic product video</li><li>BTS</li><li>Video de lanzamiento</li></ul></td>
+<td><ul><li>6-9 posts</li><li>3 reels</li><li>Stories</li><li>Plantillas</li></ul></td>
+<td>Demuestra <strong>branding + producto + lifestyle + contenido</strong>.</td>
+</tr>
+<tr data-skills="branding photo video social free">
+<td>02</td>
+<td>SKINCARE / COSMETICA<br><span class="tag">FREE</span><span class="priority high">START HERE</span>
+<div class="contact-box">
+  <div class="cb-label">Candidato recomendado</div>
+  <p><strong>Bambu 7 Natural Care</strong></p>
+  <p>Skincare artesanal hecho en El Salvador, productos naturales</p>
+  <p><a href="https://bambu7.com" target="_blank">Web: bambu7.com</a></p>
+</div>
+<div class="contact-box" style="margin-top:6px">
+  <div class="cb-label">Alternativa</div>
+  <p><strong>Ecobelle El Salvador</strong></p>
+  <p>Belleza vegana, cruelty-free, eco-friendly</p>
+  <p><a href="https://instagram.com/ecobelle_sv" target="_blank">IG: @ecobelle_sv</a></p>
+  <p>WhatsApp: 7910-4506</p>
+</div>
+</td>
+<td><strong>Nueva identidad visual</strong><ul><li>Logo</li><li>Packaging</li><li>Etiquetas</li><li>Sistema de color</li><li>Direccion de arte</li><li>Brand guidelines</li></ul></td>
+<td><ul><li>Producto</li><li>Macro</li><li>Texturas</li><li>Ingredientes</li><li>Composicion editorial</li><li>Lifestyle</li></ul></td>
+<td><ul><li>Product commercial</li><li>Macro shots</li><li>Motion typography</li><li>Reel de lanzamiento</li></ul></td>
+<td><ul><li>Campana</li><li>Carruseles</li><li>Reels</li><li>Producto + beneficios</li><li>UGC-style</li></ul></td>
+<td>Demuestra <strong>direccion de arte y fotografia comercial</strong>.</td>
+</tr>
+<tr data-skills="branding photo video social">
+<td>03</td>
+<td>STREETWEAR / MODA<span class="priority med">CONCEPTUAL</span></td>
+<td><strong>Brand identity + campaign</strong><ul><li>Logo</li><li>Sistema grafico</li><li>Tags</li><li>Packaging</li><li>Stickers</li><li>Direccion visual</li></ul></td>
+<td><ul><li>Editorial</li><li>Lookbook</li><li>Producto</li><li>Urbana</li><li>Retratos</li><li>Details</li></ul></td>
+<td><ul><li>Fashion film</li><li>Teaser de coleccion</li><li>Campaign 15-30s</li><li>BTS</li></ul></td>
+<td><ul><li>Launch campaign</li><li>Teasers</li><li>Stories</li><li>Reels</li></ul></td>
+<td>Proyecto mas <strong>conceptual y cinematografico</strong>.</td>
+</tr>
+<tr data-skills="branding photo video social">
+<td>04</td>
+<td>FOOD / RESTAURANTE<span class="priority med">COMMERCIAL</span></td>
+<td><strong>Brand refresh</strong><ul><li>Logo</li><li>Menu</li><li>Packaging</li><li>Senalizacion</li><li>Sistema grafico</li><li>Aplicaciones</li></ul></td>
+<td><ul><li>Hero food</li><li>Platos</li><li>Ingredientes</li><li>Ambiente</li><li>Staff</li><li>Lifestyle</li></ul></td>
+<td><ul><li>Commercial</li><li>Food preparation</li><li>Slow motion</li><li>Reel</li><li>Social ads</li></ul></td>
+<td><ul><li>Menu digital</li><li>Reels</li><li>Promociones</li><li>Carruseles</li><li>Stories</li></ul></td>
+<td>Convertir una identidad en <strong>contenido que vende</strong>.</td>
+</tr>
+<tr data-skills="branding photo video social">
+<td>05</td>
+<td>TECH / AUDIO / PRODUCTO<span class="priority low">FINAL BOSS</span></td>
+<td><strong>Brand system + product launch</strong><ul><li>Identity</li><li>Packaging</li><li>UI elements</li><li>Product graphics</li><li>Launch system</li></ul></td>
+<td><ul><li>Product photography</li><li>Studio shots</li><li>Macro</li><li>Dramatic lighting</li><li>Technical details</li></ul></td>
+<td><ul><li>Product commercial</li><li>3D / motion</li><li>Sound design</li><li>Launch animation</li></ul></td>
+<td><ul><li>Product launch</li><li>Feature videos</li><li>Tech carousels</li><li>Short-form</li></ul></td>
+<td>Lenguaje <strong>HUD / tecnologico / futurista</strong>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="mobile-cards">
+  <div class="mobile-card" data-skills="branding photo video social free">
+    <div class="mc-head"><span class="mc-num">01</span><span class="tag">FREE</span><span class="priority high">START HERE</span></div>
+    <h4>CAFE / SPECIALTY COFFEE</h4>
+    <div class="mc-section"><div class="mc-label">Que construir</div><ul><li>Logo, paleta, tipografia</li><li>Packaging, vasos, bolsas</li><li>Menu, sistema grafico</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Fotografia</div><ul><li>Producto, lifestyle, barista</li><li>Cafe servido, texturas, editorial</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Video / Motion</div><ul><li>Reel preparacion, cinematic video</li><li>BTS, video lanzamiento</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Social</div><ul><li>6-9 posts, 3 reels, stories, plantillas</li></ul></div>
+    <p class="mc-value"><strong>Valor:</strong> Branding + producto + lifestyle + contenido.</p>
+    <div class="contact-box">
+      <div class="cb-label">Candidato recomendado</div>
+      <p><strong>Cafe del Centro</strong></p>
+      <p>Cafe de especialidad, Est. 2023</p>
+      <p><a href="https://instagram.com/cafedelcentrosv" target="_blank">IG: @cafedelcentrosv</a></p>
+      <p>Tel: 7691-7817 | 2a Avenida Sur 1101</p>
+    </div>
+    <div class="contact-box">
+      <div class="cb-label">Alternativa</div>
+      <p><strong>Kafeina</strong></p>
+      <p>Cafe de especialidad, San Miguel. Metodos artesanales V60, Chemex.</p>
+      <p><a href="https://instagram.com/kafeina.sv" target="_blank">IG: @kafeina.sv</a></p>
+      <p>URB. Ciudad Real, atras de Plaza Palmera, San Miguel</p>
+      <p>Lun-Dom 12pm-8pm</p>
+    </div>
+  </div>
+  <div class="mobile-card" data-skills="branding photo video social free">
+    <div class="mc-head"><span class="mc-num">02</span><span class="tag">FREE</span><span class="priority high">START HERE</span></div>
+    <h4>SKINCARE / COSMETICA</h4>
+    <div class="mc-section"><div class="mc-label">Que construir</div><ul><li>Logo, packaging, etiquetas</li><li>Sistema de color, brand guidelines</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Fotografia</div><ul><li>Producto, macro, texturas</li><li>Ingredientes, editorial, lifestyle</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Video / Motion</div><ul><li>Product commercial, macro shots</li><li>Motion typography, reel lanzamiento</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Social</div><ul><li>Campana, carruseles, reels, UGC-style</li></ul></div>
+    <p class="mc-value"><strong>Valor:</strong> Direccion de arte + fotografia comercial + branding.</p>
+    <div class="contact-box">
+      <div class="cb-label">Candidato recomendado</div>
+      <p><strong>Bambu 7 Natural Care</strong></p>
+      <p>Skincare artesanal hecho en El Salvador</p>
+      <p><a href="https://bambu7.com" target="_blank">Web: bambu7.com</a></p>
+    </div>
+    <div class="contact-box" style="margin-top:6px">
+      <div class="cb-label">Alternativa</div>
+      <p><strong>Ecobelle El Salvador</strong></p>
+      <p>Belleza vegana, cruelty-free, eco-friendly</p>
+      <p><a href="https://instagram.com/ecobelle_sv" target="_blank">IG: @ecobelle_sv</a></p>
+      <p>WhatsApp: 7910-4506</p>
+    </div>
+  </div>
+  <div class="mobile-card" data-skills="branding photo video social">
+    <div class="mc-head"><span class="mc-num">03</span><span class="priority med">CONCEPTUAL</span></div>
+    <h4>STREETWEAR / MODA</h4>
+    <div class="mc-section"><div class="mc-label">Que construir</div><ul><li>Logo, sistema grafico, tags</li><li>Packaging, stickers, direccion visual</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Fotografia</div><ul><li>Editorial, lookbook, producto</li><li>Urbana, retratos, details</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Video / Motion</div><ul><li>Fashion film, teaser coleccion</li><li>Campaign 15-30s, BTS</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Social</div><ul><li>Launch campaign, teasers, stories, reels</li></ul></div>
+    <p class="mc-value"><strong>Valor:</strong> Proyecto mas conceptual y cinematografico.</p>
+  </div>
+  <div class="mobile-card" data-skills="branding photo video social">
+    <div class="mc-head"><span class="mc-num">04</span><span class="priority med">COMMERCIAL</span></div>
+    <h4>FOOD / RESTAURANTE</h4>
+    <div class="mc-section"><div class="mc-label">Que construir</div><ul><li>Logo, menu, packaging</li><li>Senalizacion, sistema grafico, aplicaciones</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Fotografia</div><ul><li>Hero food, platos, ingredientes</li><li>Ambiente, staff, lifestyle</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Video / Motion</div><ul><li>Commercial, food preparation</li><li>Slow motion, reel, social ads</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Social</div><ul><li>Menu digital, reels, promociones, carruseles</li></ul></div>
+    <p class="mc-value"><strong>Valor:</strong> Convertir una identidad en contenido que vende.</p>
+  </div>
+  <div class="mobile-card" data-skills="branding photo video social">
+    <div class="mc-head"><span class="mc-num">05</span><span class="priority low">FINAL BOSS</span></div>
+    <h4>TECH / AUDIO / PRODUCTO</h4>
+    <div class="mc-section"><div class="mc-label">Que construir</div><ul><li>Identity, packaging, UI elements</li><li>Product graphics, launch system</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Fotografia</div><ul><li>Product photography, studio shots</li><li>Macro, dramatic lighting, technical details</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Video / Motion</div><ul><li>Product commercial, 3D / motion</li><li>Sound design, launch animation</li></ul></div>
+    <div class="mc-section"><div class="mc-label">Social</div><ul><li>Product launch, feature videos</li><li>Tech carousels, short-form</li></ul></div>
+    <p class="mc-value"><strong>Valor:</strong> Lenguaje HUD / tecnologico / futurista.</p>
+  </div>
+</div>
+
+<!-- ═══════ 02 — TIMELINE ═══════ -->
+<div class="section-title" id="timeline">
+  <h2>02 — Timeline</h2>
+  <span>12-WEEK EXECUTION PLAN</span>
+</div>
+
+<div class="timeline-track">
+  <div class="timeline-phase parallel">
+    <span class="parallel-badge">PARALLEL</span>
+    <div class="phase-num">PHASE 01</div>
+    <h4>Free Projects</h4>
+    <div class="weeks">Weeks 1-3</div>
+    <ul>
+      <li>Cafe: Branding + packaging</li>
+      <li>Skincare: Identity + guidelines</li>
+      <li>Both: Photography sessions</li>
+      <li>Both: Social content batch</li>
+    </ul>
+    <div class="timeline-bar"><i style="width:100%"></i></div>
+  </div>
+  <div class="timeline-phase">
+    <div class="phase-num">PHASE 02</div>
+    <h4>Streetwear</h4>
+    <div class="weeks">Weeks 4-6</div>
+    <ul>
+      <li>Brand identity + system</li>
+      <li>Editorial + lookbook shoot</li>
+      <li>Fashion film production</li>
+      <li>Launch campaign</li>
+    </ul>
+    <div class="timeline-bar"><i style="width:100%"></i></div>
+  </div>
+  <div class="timeline-phase">
+    <div class="phase-num">PHASE 03</div>
+    <h4>Food / Restaurant</h4>
+    <div class="weeks">Weeks 7-9</div>
+    <ul>
+      <li>Brand refresh</li>
+      <li>Food photography session</li>
+      <li>Commercial + reels</li>
+      <li>Digital menu + social</li>
+    </ul>
+    <div class="timeline-bar"><i style="width:100%"></i></div>
+  </div>
+  <div class="timeline-phase">
+    <div class="phase-num">PHASE 04</div>
+    <h4>Tech + Website</h4>
+    <div class="weeks">Weeks 10-12</div>
+    <ul>
+      <li>Tech brand system</li>
+      <li>Product commercial + 3D</li>
+      <li>Portfolio website build</li>
+      <li>Case studies + launch</li>
+    </ul>
+    <div class="timeline-bar"><i style="width:100%"></i></div>
+  </div>
+</div>
+
+<!-- ═══════ 03 — SKILL COVERAGE ═══════ -->
+<div class="section-title" id="skills">
+  <h2>03 — Portfolio Skill Coverage</h2>
+  <span>WHAT EACH PROJECT PROVES</span>
+</div>
+
+<div class="cards">
+  <div class="card"><div class="num">01 / CAFE</div><h3>Branding + Lifestyle</h3><div class="meter"><i style="width:90%"></i></div><p>Identidad, packaging, producto, personas y contenido.</p></div>
+  <div class="card"><div class="num">02 / SKINCARE</div><h3>Art Direction</h3><div class="meter"><i style="width:100%"></i></div><p>Fotografia comercial, macro, textura, producto y campana.</p></div>
+  <div class="card"><div class="num">03 / STREETWEAR</div><h3>Campaign + Film</h3><div class="meter"><i style="width:100%"></i></div><p>Editorial, fashion film, direccion y lanzamiento.</p></div>
+  <div class="card"><div class="num">04 / FOOD</div><h3>Commercial Content</h3><div class="meter"><i style="width:90%"></i></div><p>Food photography y contenido orientado a ventas.</p></div>
+  <div class="card"><div class="num">05 / TECH</div><h3>Product + Motion</h3><div class="meter"><i style="width:100%"></i></div><p>Producto, motion graphics, sonido y estetica tecnologica.</p></div>
+</div>
+
+<!-- ═══════ 04 — WORKFLOW ═══════ -->
+<div class="section-title" id="workflow">
+  <h2>04 — Case Study Structure</h2>
+  <span>REPEATABLE FORMAT</span>
+</div>
+
+<div class="workflow">
+  <div class="step"><b>01 / DISCOVERY</b><h3>Problem</h3><p>Que problema tenia la marca? Que oportunidad encontraste?</p></div>
+  <div class="step"><b>02 / STRATEGY</b><h3>Direction</h3><p>Concepto, posicionamiento, audiencia y decisiones creativas.</p></div>
+  <div class="step"><b>03 / IDENTITY</b><h3>Brand System</h3><p>Logo, color, tipografia, graficos, packaging y aplicaciones.</p></div>
+  <div class="step"><b>04 / ART DIRECTION</b><h3>Visual Language</h3><p>Mood, iluminacion, composicion, props, styling y escenario.</p></div>
+  <div class="step"><b>05 / PHOTOGRAPHY</b><h3>Image System</h3><p>Producto, lifestyle, editorial, macro y detalles.</p></div>
+  <div class="step"><b>06 / MOTION</b><h3>Moving Image</h3><p>Commercial, reels, animation, motion typography y sound design.</p></div>
+  <div class="step"><b>07 / SOCIAL</b><h3>Content System</h3><p>Posts, reels, stories, carruseles, teasers y campana.</p></div>
+  <div class="step"><b>08 / FINAL SYSTEM</b><h3>Applications</h3><p>Packaging, posters, digital, fisico y piezas de campana.</p></div>
+  <div class="step"><b>09 / RESULTS</b><h3>Before - After</h3><p>Comparacion visual y explicacion clara del impacto del proyecto.</p></div>
+</div>
+
+<!-- ═══════ 05 — TOOLS ═══════ -->
+<div class="section-title" id="tools">
+  <h2>05 — Tools & Software</h2>
+  <span>WHAT YOU NEED PER PROJECT</span>
+</div>
+
+<div class="tools-grid">
+  <div class="tool-card">
+    <h4>01 / CAFE</h4>
+    <ul><li>Figma (branding + packaging)</li><li>Illustrator (logo + system)</li><li>Lightroom (photography)</li><li>Premiere Pro (reels + video)</li><li>Photoshop (mockups)</li></ul>
+  </div>
+  <div class="tool-card">
+    <h4>02 / SKINCARE</h4>
+    <ul><li>Figma (brand guidelines)</li><li>Illustrator (identity system)</li><li>Lightroom + Capture One</li><li>After Effects (motion type)</li><li>Premiere Pro (commercial)</li></ul>
+  </div>
+  <div class="tool-card">
+    <h4>03 / STREETWEAR</h4>
+    <ul><li>Figma (brand + campaign)</li><li>Lightroom (editorial)</li><li>Premiere Pro (fashion film)</li><li>After Effects (motion)</li><li>DaVinci Resolve (color)</li></ul>
+  </div>
+  <div class="tool-card">
+    <h4>04 / FOOD</h4>
+    <ul><li>Figma (menu + system)</li><li>Lightroom (food photography)</li><li>Premiere Pro (commercials)</li><li>After Effects (social ads)</li><li>Photoshop (food retouching)</li></ul>
+  </div>
+  <div class="tool-card">
+    <h4>05 / TECH</h4>
+    <ul><li>Figma (UI + brand system)</li><li>Blender / Cinema 4D (3D)</li><li>After Effects (motion)</li><li>Premiere Pro (commercial)</li><li>Ableton / Logic (sound design)</li></ul>
+  </div>
+</div>
+
+<!-- ═══════ 06 — PROGRESS TRACKER (PER PROJECT) ═══════ -->
+<div class="section-title" id="progress">
+  <h2>06 — Progress Tracker</h2>
+  <span>TRACK YOUR EXECUTION</span>
+</div>
+
+<div class="overall-bar-wrap">
+  <span class="label">Overall</span>
+  <div class="overall-bar"><i id="overallBar" style="width:0%"></i></div>
+  <span class="pct" id="overallPct">0%</span>
+</div>
+
+<div class="project-progress">
+
+  <!-- CAFE -->
+  <div class="proj-card" data-proj="cafe">
+    <div class="proj-head">
+      <h4>01 / CAFE</h4>
+      <span class="proj-pct" data-pct="cafe">0%</span>
+    </div>
+    <div class="proj-sub">Specialty Coffee Rebranding</div>
+    <div class="proj-bar"><i data-bar="cafe" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="cafe"> Logo + paleta de colores</label>
+      <label><input type="checkbox" data-group="cafe"> Packaging (vasos, bolsas)</label>
+      <label><input type="checkbox" data-group="cafe"> Menu + sistema grafico</label>
+      <label><input type="checkbox" data-group="cafe"> Sesion fotografia producto</label>
+      <label><input type="checkbox" data-group="cafe"> Sesion lifestyle + barista</label>
+      <label><input type="checkbox" data-group="cafe"> Reel de preparacion</label>
+      <label><input type="checkbox" data-group="cafe"> Social content (posts + reels)</label>
+    </div>
+  </div>
+
+  <!-- SKINCARE -->
+  <div class="proj-card" data-proj="skincare">
+    <div class="proj-head">
+      <h4>02 / SKINCARE</h4>
+      <span class="proj-pct" data-pct="skincare">0%</span>
+    </div>
+    <div class="proj-sub">Cosmetica Identity</div>
+    <div class="proj-bar"><i data-bar="skincare" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="skincare"> Logo + identidad visual</label>
+      <label><input type="checkbox" data-group="skincare"> Packaging + etiquetas</label>
+      <label><input type="checkbox" data-group="skincare"> Brand guidelines</label>
+      <label><input type="checkbox" data-group="skincare"> Sesion macro + texturas</label>
+      <label><input type="checkbox" data-group="skincare"> Product commercial</label>
+      <label><input type="checkbox" data-group="skincare"> Motion typography</label>
+      <label><input type="checkbox" data-group="skincare"> Social campaign</label>
+    </div>
+  </div>
+
+  <!-- STREETWEAR -->
+  <div class="proj-card" data-proj="street">
+    <div class="proj-head">
+      <h4>03 / STREETWEAR</h4>
+      <span class="proj-pct" data-pct="street">0%</span>
+    </div>
+    <div class="proj-sub">Moda Campaign + Film</div>
+    <div class="proj-bar"><i data-bar="street" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="street"> Brand identity + system</label>
+      <label><input type="checkbox" data-group="street"> Tags + stickers + packaging</label>
+      <label><input type="checkbox" data-group="street"> Editorial + lookbook shoot</label>
+      <label><input type="checkbox" data-group="street"> Fashion film</label>
+      <label><input type="checkbox" data-group="street"> Launch campaign social</label>
+    </div>
+  </div>
+
+  <!-- FOOD -->
+  <div class="proj-card" data-proj="food">
+    <div class="proj-head">
+      <h4>04 / FOOD</h4>
+      <span class="proj-pct" data-pct="food">0%</span>
+    </div>
+    <div class="proj-sub">Restaurante Brand Refresh</div>
+    <div class="proj-bar"><i data-bar="food" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="food"> Brand refresh + logo</label>
+      <label><input type="checkbox" data-group="food"> Menu + senalizacion</label>
+      <label><input type="checkbox" data-group="food"> Hero food photography</label>
+      <label><input type="checkbox" data-group="food"> Commercial + slow motion</label>
+      <label><input type="checkbox" data-group="food"> Social content + reels</label>
+    </div>
+  </div>
+
+  <!-- TECH -->
+  <div class="proj-card" data-proj="tech">
+    <div class="proj-head">
+      <h4>05 / TECH</h4>
+      <span class="proj-pct" data-pct="tech">0%</span>
+    </div>
+    <div class="proj-sub">Audio Product Launch</div>
+    <div class="proj-bar"><i data-bar="tech" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="tech"> Brand system + identity</label>
+      <label><input type="checkbox" data-group="tech"> Product photography studio</label>
+      <label><input type="checkbox" data-group="tech"> 3D / motion commercial</label>
+      <label><input type="checkbox" data-group="tech"> Sound design</label>
+      <label><input type="checkbox" data-group="tech"> Launch animation</label>
+    </div>
+  </div>
+
+  <!-- WEBSITE -->
+  <div class="proj-card full-width" data-proj="site">
+    <div class="proj-head">
+      <h4>WEBSITE</h4>
+      <span class="proj-pct" data-pct="site">0%</span>
+    </div>
+    <div class="proj-sub">Portfolio Website Build</div>
+    <div class="proj-bar"><i data-bar="site" style="width:0%"></i></div>
+    <div class="proj-tasks">
+      <label><input type="checkbox" data-group="site"> Wireframes + structure</label>
+      <label><input type="checkbox" data-group="site"> Visual design</label>
+      <label><input type="checkbox" data-group="site"> Build + code</label>
+      <label><input type="checkbox" data-group="site"> Case studies content</label>
+      <label><input type="checkbox" data-group="site"> Final review + launch</label>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════ 07 — WEBSITE ═══════ -->
+<div class="section-title" id="website">
+  <h2>07 — Website Direction</h2>
+  <span>LIQUID GLASS / DARK / GREEN</span>
+</div>
+
+<div class="site">
+<pre>
++--------------------------------------------------------------+
+| ANIBAL / CREATIVE SYSTEM                         11:42:08   |
++--------------------------------------------------------------+
+|                                                              |
+|             BRANDING / PHOTO / MOTION                       |
+|                                                              |
+|             05 PROJECTS ONLINE                               |
+|                                                              |
++--------------------------------------------------------------+
+|                                                              |
+|  PROJECT 01                         PROJECT 02               |
+|  CAFE                               SKINCARE                 |
+|                                                              |
+|  PROJECT 03                         PROJECT 04               |
+|  STREETWEAR                         FOOD                     |
+|                                                              |
+|                  PROJECT 05                                  |
+|                  TECH                                        |
+|                                                              |
++--------------------------------------------------------------+
+
+VISUAL LANGUAGE
+[ BLACK / DARK ] [ <span class="green">SPOTIFY GREEN</span> ] [ GRID ] [ HUD ]
+[ LIQUID GLASS ] [ MICRO ANIMATIONS ] [ TYPOGRAPHIC SYSTEM ]
+
+PROJECT DATA
+STATUS       COMPLETED
+CATEGORY     BRAND / PHOTO / MOTION
+YEAR         2026
+BRAND        %%%%%%%%%%%%%%%%%% 100%
+PHOTO        %%%%%%%%%%%%%%%%%%%  90%
+MOTION       %%%%%%%%%%%%%%%     75%
+SOCIAL       %%%%%%%%%%%%%%%%%%%% 95%
+</pre>
+</div>
+
+<footer>
+  <span>ANIBAL // CREATIVE PORTFOLIO</span>
+  <span>BRAND / PHOTO / VIDEO / MOTION</span>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  /* ── Nav scroll ── */
+  const sections=document.querySelectorAll('[id]');
+  const navLinks=document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll',()=>{
+    let current='';
+    sections.forEach(s=>{if(pageYOffset>=s.offsetTop-100) current=s.getAttribute('id')});
+    navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+  });
+
+  /* ── Filters ── */
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f=btn.dataset.filter;
+      document.querySelectorAll('tbody tr').forEach(r=>{r.style.display=(f==='all'||r.dataset.skills.includes(f))?'':'none'});
+      document.querySelectorAll('.mobile-card').forEach(c=>{c.style.display=(f==='all'||c.dataset.skills.includes(f))?'':'none'});
+    });
+  });
+
+  /* ── Progress per project + overall ── */
+  const STORAGE='kiru-roadmap-v2';
+  const groups=['cafe','skincare','street','food','tech','site'];
+  const allCbs=document.querySelectorAll('.proj-tasks input[type="checkbox"]');
+
+  function load(){
+    const s=localStorage.getItem(STORAGE);
+    if(s){const d=JSON.parse(s);allCbs.forEach((cb,i)=>{if(d[i])cb.checked=true})}
+    updateAll();
+  }
+  function save(){
+    const d=[];allCbs.forEach(cb=>d.push(cb.checked));
+    localStorage.setItem(STORAGE,JSON.stringify(d));
+  }
+  function updateAll(){
+    let totalDone=0,totalAll=0;
+    groups.forEach(g=>{
+      const cbs=document.querySelectorAll('[data-group="'+g+'"]');
+      const done=[...cbs].filter(c=>c.checked).length;
+      const total=cbs.length;
+      totalDone+=done;totalAll+=total;
+      const pct=total?Math.round((done/total)*100):0;
+      const pctEl=document.querySelector('[data-pct="'+g+'"]');
+      const barEl=document.querySelector('[data-bar="'+g+'"]');
+      if(pctEl)pctEl.textContent=pct+'%';
+      if(barEl)barEl.style.width=pct+'%';
+      cbs.forEach(cb=>cb.closest('label').classList.toggle('done',cb.checked));
+    });
+    const overall=totalAll?Math.round((totalDone/totalAll)*100):0;
+    document.getElementById('overallPct').textContent=overall+'%';
+    document.getElementById('overallBar').style.width=overall+'%';
+  }
+  allCbs.forEach(cb=>cb.addEventListener('change',()=>{save();updateAll()}));
+  load();
+})();
+</script>
+</body>
+</html>
