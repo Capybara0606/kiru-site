@@ -815,17 +815,32 @@ SOCIAL       %%%%%%%%%%%%%%%%%%%% 95%
 
   /* ── Progress per project + overall ── */
   const STORAGE='kiru-roadmap-v2';
+  const SYNC_URL='https://api.keyval.org';
+  const SYNC_KEY='kiru2026-roadmap';
   const groups=['cafe','skincare','street','food','tech','site'];
   const allCbs=document.querySelectorAll('.proj-tasks input[type="checkbox"]');
 
+  function getData(){
+    const d=[];allCbs.forEach(cb=>d.push(cb.checked));
+    return d;
+  }
+  function applyData(d){
+    if(!Array.isArray(d))return;
+    allCbs.forEach((cb,i)=>{if(d[i])cb.checked=!!d[i];else cb.checked=false});
+  }
   function load(){
     const s=localStorage.getItem(STORAGE);
-    if(s){const d=JSON.parse(s);allCbs.forEach((cb,i)=>{if(d[i])cb.checked=true})}
+    if(s){try{applyData(JSON.parse(s))}catch(e){}}
     updateAll();
+    fetch(SYNC_URL+'/get/'+SYNC_KEY,{cache:'no-store'})
+      .then(r=>r.ok?r.json():Promise.reject())
+      .then(j=>{if(j.status==='SUCCESS'&&j.val){try{const d=JSON.parse(j.val);applyData(d);localStorage.setItem(STORAGE,j.val)}catch(e){}}updateAll()})
+      .catch(()=>{});
   }
   function save(){
-    const d=[];allCbs.forEach(cb=>d.push(cb.checked));
+    const d=getData();
     localStorage.setItem(STORAGE,JSON.stringify(d));
+    fetch(SYNC_URL+'/set/'+SYNC_KEY+'/'+encodeURIComponent(JSON.stringify(d)),{cache:'no-store'}).catch(()=>{});
   }
   function updateAll(){
     let totalDone=0,totalAll=0;
