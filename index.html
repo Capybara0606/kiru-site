@@ -821,7 +821,7 @@ SOCIAL       %%%%%%%%%%%%%%%%%%%% 95%
   const allCbs=document.querySelectorAll('.proj-tasks input[type="checkbox"]');
 
   function encode(){
-    return allCbs.map(cb=>cb.checked?'1':'0').join('');
+    let v='';allCbs.forEach(cb=>v+=cb.checked?'1':'0');return v;
   }
   function decode(str){
     if(typeof str!=='string')return;
@@ -860,7 +860,7 @@ SOCIAL       %%%%%%%%%%%%%%%%%%%% 95%
     document.getElementById('overallPct').textContent=overall+'%';
     document.getElementById('overallBar').style.width=overall+'%';
   }
-  allCbs.forEach(cb=>cb.addEventListener('change',()=>{save();updateAll()}));
+  allCbs.forEach(cb=>cb.addEventListener('change',()=>{try{save()}catch(e){}updateAll()}));
   load();
 })();
 </script>
